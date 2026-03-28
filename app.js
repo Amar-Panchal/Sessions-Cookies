@@ -7,12 +7,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const dotenv = require('dotenv');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const env = dotenv.config({ path: `./.env` }).parsed;
 
 const MONGODB_URI = process.env.MONGODB_URI;
-
+console.log('MONGODB_URI', MONGODB_URI, dotenv, env);
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
